@@ -1,132 +1,106 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    <title>Memory by M&M</title>
-</head>
-<body>
-    <main class="container">
-        <div class="text-container">
-            <h1>Javascript memory</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="style.css">
+        <title>Memory by M&M</title>
+    </head>
+    <body>
+        <main class="container">
+            <div class="text-container">
+                <h1>Javascript memory</h1>
 
-            <div id="timer">
-                <p>Verlopen tijd: 00:00:00</p>
-            </div>
-            <div id="found-pairs">
-                <p>Gevonden kaart-paren: 0</p>
-            </div>
-            <p id="show-time">Resterende toontijd: 00:03:00</p>
-            <progress min="0" max="100" value="5" > 5% </progress>
-        </div>
-
-        <div class="main-content">
-            <div class="game-board">
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-
-                <div class="card">?</div>
-                <div class="card found-card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card found-card">?</div>
-                <div class="card">?</div>
-
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-                <div class="card">?</div>
-            </div>
-
-            <aside class="sidebar">
-                <div class="sidebar-content1">
-                    <div class="ranking">
-                        <h3>Top vijf:</h3>
-                        <ol>
-                            <li>Mohamed </li>
-                            <li>Mike </li>
-                            <li>Liz </li>
-                            <li>Daniel </li>
-                            <li>Martijn </li>
-                        </ol>
-                    </div>
-                    <div class="playtime">
-                        <h3><b>Gemiddle speeltijd: </b> 00:09:31</h3>
-                    </div>
-
-                    <div class="board-settings">
-                        <h3 id="card-character"><b>Karakter op kaarten: </b>
-                            <select name="symbol-card" id="card-symbol" onchange="changeCardSymbol()">
-                                <option value="?">?</option>
-                                <option value="!">!</option>
-                                <option value="*">*</option>
-                                <option value="@">@</option>
-                            </select>
-                        </h3>
-
-                        <h3 id="board-size-cards"><b>Afmetingen bord: </b>
-                            <select name="board-size" id="#">
-                                <option value="#">4 x 4</option>
-                                <option value="#">6 x 6</option>
-                                <option value="#">8 x 8</option>
-                            </select>
-                        </h3>
-                    </div>
+                <div id="timer">
+                    <p>Verlopen tijd: 00:00:00</p>
                 </div>
-                <div class="sidebar-content2">
-                    <div class="board-colors">
-                        <div class="card-color-control">
-                            <div class="input-group">
-                                <input type="color" id="card-cover" value="#2b2b2b" onchange="changeCardCover()">
-                                <label for="card-cover">Kaartkleur</label>
-                            </div>
-                            <div class="input-group">
-                                <input type="color" id="card-open" value="#ff1744" onchange="changeOpenCardCover()">
-                                <label for="card-open">Open</label>
-                            </div>
-                            <div class="input-group">
-                                <input type="color" id="card-complete" value="#ff5bff" onchange="changeFoundedCardCover()">
-                                <label for="card-complete">Gevonden</label>
-                            </div>
+                <div id="found-pairs">
+                    <p class="found-pairs">Gevonden kaart-paren:</p>
+                    <div class="found-pairs" id="pair-count">0</div>
+                </div>
+                <p id="show-time">Resterende toontijd: 00:03:00</p>
+                <progress class="progress-bar" min="0" max="100" value="100" ></progress>
+            </div>
+            <div class="main-content">
+                <div id="game-board" aria-label="Memory bord"></div>
+
+                <aside class="sidebar">
+                    <div class="sidebar-content1">
+                        <div class="ranking" aria-label="Top 5 player ranking">
+                            <h3>Top vijf:</h3>
+                            <ol>
+                                <li>Mohamed </li>
+                                <li>Mike </li>
+                                <li>Liz </li>
+                                <li>Daniel </li>
+                                <li>Martijn </li>
+                            </ol>
+                        </div>
+                        <div class="playtime">
+                            <h3><b>Gemiddelde speeltijd: </b> 00:09:31</h3>
+                        </div>
+
+                        <div class="board-settings">
+                            <h3 id="card-character" aria-label="Kies kaart karakter op achterkant kaart" ><b>Karakter op kaarten: </b>
+                                <select name="symbol-card" id="card-symbol">
+                                    <option value="?">?</option>
+                                    <option value="!">!</option>
+                                    <option value="*">*</option>
+                                    <option value="@">@</option>
+                                </select>
+                            </h3>
+
+                            <h3 id="board-size-cards" aria-label="Kies bord afmeting"><b>Afmetingen bord: </b>
+                                <select name="board-size" id="board-size">
+                                    <option value="4">4 x 4</option>
+                                    <option value="6" selected>6 x 6</option>
+                                </select>
+                            </h3>
+
+                            <h3 id="card-images" aria-label="Kies soort plaatje op voorkant"><b>Kies plaatjes: </b>
+                                <select name="card-images" id="card-image">
+                                    <option value="random" selected>Willekeurig</option>
+                                    <option value="dogs">Honden</option>
+                                    <option value="cats">Katten</option>
+                                    <option value="tigers">Tijgers</option>
+                                    <option value="gorilla">Gorilla's</option>
+                                </select>
+                            </h3>
                         </div>
                     </div>
-                    <div class="new-game">
-                        <input type="button" value="Nieuw spel" onclick="refreshPage()">
+                    <div class="sidebar-content2">
+                        <div class="board-colors">
+                            <div aria-label="Kaarten kleuren opties" class="card-color-control">
+                                <div aria-label="Achterkant kaart kleur" class="input-group">
+                                    <input type="color" id="card-cover" value="#000000">
+                                    <label for="card-cover">Kaartkleur</label>
+                                </div>
+                                <div aria-label="Geselecteerd kaart kleur" class="input-group">
+                                    <input type="color" id="card-open" value="#ff1744">
+                                    <label for="card-open">Open</label>
+                                </div>
+                                <div aria-label="Gematchte kaart kleur" class="input-group">
+                                    <input type="color" id="card-match" value="#ff5bff">
+                                    <label for="card-match">Gevonden</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="new-game">
+                            <input class="new-game" type="button" value="Nieuw spel">
+                        </div>
                     </div>
-                </div>
-            </aside>
+                </aside>
+            </div>
+        </main>
+        <div class="pop-up" id="win-pop-up">
+            <div class="modal" id="modal-stats" aria-label="Felicitatie pop up">
+                <p>Gefeliciteerd, alle kaarten zijn gevonden!</p>
+                <input class="new-game" type="button" value="Nieuw spel">
+            </div>
         </div>
-    </main>
-</body>
-<script type="text/javascript" src="index.js"></script>
+    </body>
+    <script type="text/javascript" src="js/memory-settings.js"></script>
+    <script type="text/javascript" src="js/memory.js"></script>
 </html>

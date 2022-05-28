@@ -11,6 +11,7 @@ html, body {
     width: 100%;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 /*Text container*/
@@ -31,7 +32,7 @@ html, body {
 .text-container progress {
     border: 2px solid black;
     border-radius: 3%;
-    margin: auto;
+    margin-bottom: 10px;
 }
 
 .text-container progress::-webkit-progress-value {
@@ -45,30 +46,53 @@ html, body {
 /*Main-content includes game-board and sidebar*/
 .main-content {
     display: flex;
+    height: 80%;
+}
+
+.found-pairs {
+    display: inline-block;
+    margin: 0;
 }
 
 /*Game-board attributes*/
-.game-board {
+#game-board {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    background-color: black;
     width: 60%;
     margin-left: .5%;
-    position: relative;
-    aspect-ratio: 100 / 29;
+    grid-gap: 0.5rem;
+    padding: 1% 1.5% 1% 1.5%;
 }
 
-.game-board .card {
+#game-board .card {
     text-align: center;
     color: white;
-    border: 2px solid white;
-    padding: 26%;
-    position: relative;
-    font-size: 25px;
+    background: #000000;
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+    font-size: 10px;
 }
 
-.game-board .found-card {
-    background-color: #ff5bff;
+#game-board .card .front {
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    display: none;
+    border-radius: 5px;
+}
+
+#game-board .card .cover {
+    pointer-events: none;
+    display: block;
+    font-size: 2em;
+}
+
+.clicked {
+    display: none;
+}
+
+.card:hover {
+    transform: scale(1.01);
 }
 
 /*Sidebar attributes*/
@@ -86,6 +110,11 @@ html, body {
 
 .sidebar .board-settings #board-size-cards {
     margin-top: 0;
+    margin-bottom: 0;
+}
+
+.sidebar .board-settings #card-images {
+    margin-top: 0;
 }
 
 .sidebar .board-colors {
@@ -95,8 +124,29 @@ html, body {
     margin-top: 10%;
 }
 
+.pop-up {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+}
+
+.modal {
+    border-radius: 15px;
+    text-align: center;
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    width: 20%;
+}
+
 /*Media query for screen sizing*/
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     html, body {
         background-color: white;
     }
@@ -106,7 +156,7 @@ html, body {
     .text-container {
         width: 100%;
     }
-    .main-content .game-board {
+    .main-content #game-board {
         width: 90%;
         margin-left: 5%;
     }
@@ -118,11 +168,26 @@ html, body {
     .sidebar .sidebar-content2 {
         margin-top: 5%;
     }
+
+    #game-board .card {
+        height: 10vw;
+    }
+
+    #game-board .card .front {
+        width: 100%;
+        height: 100%;
+    }
+
 }
 
 /* Media query for screen under 465px*/
-@media only screen and (max-width: 465px) {
+@media only screen and (max-width: 490px) {
     .sidebar {
         flex-direction: column;
+    }
+    .modal {
+        width: 80%;
+        left: 3%;
+        right: 5%;
     }
 }
